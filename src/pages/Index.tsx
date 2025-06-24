@@ -20,6 +20,7 @@ const Index = () => {
     loadInitialMovies();
   }, []); // Empty dependency array - only run once on mount
   // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const handleFilterMovies = async () => {
     console.log('🎬 Filtering movies with preferences:', { selectedGenres, selectedLanguages });
     
@@ -47,7 +48,8 @@ const Index = () => {
         
         toast.success(message, {
           id: 'filtering-movies'
-        });      } else {
+        });
+      } else {
         toast.info('No movies found with those filters. Try different combinations!', {
           id: 'filtering-movies'
         });
@@ -63,37 +65,34 @@ const Index = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+  };  return (
+    <div className="min-h-screen">
       <Header />
       
       <main className="container mx-auto px-4 py-8 space-y-12">
         {/* Hero Section */}
         <div className="text-center space-y-6 py-8">
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 dark:from-emerald-300 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent">
               CineFindr
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
               Discover your next favorite movie with smart recommendations tailored to your unique taste
             </p>
           </div>
           
-          {/* Stats */}
-          <div className="flex justify-center gap-8 pt-6">
+          {/* Stats */}          <div className="flex justify-center gap-8 pt-6">
             <div className="text-center">
-              <div className="text-2xl font-bold text-slate-800">{totalMovies}</div>
-              <div className="text-sm text-slate-600">Movies Available</div>
+              <div className="text-2xl font-bold text-slate-800 dark:text-white">{totalMovies}</div>
+              <div className="text-sm text-slate-600 dark:text-gray-400">Movies Available</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-slate-800">{filteredMovies.length}</div>
-              <div className="text-sm text-slate-600">Currently Shown</div>
+              <div className="text-2xl font-bold text-slate-800 dark:text-white">{filteredMovies.length}</div>
+              <div className="text-sm text-slate-600 dark:text-gray-400">Currently Shown</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-slate-800">8</div>
-              <div className="text-sm text-slate-600">Languages</div>
+              <div className="text-2xl font-bold text-slate-800 dark:text-white">8</div>
+              <div className="text-sm text-slate-600 dark:text-gray-400">Languages</div>
             </div>
           </div>
         </div>

@@ -14,27 +14,26 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = fa
     return (
       <div className="text-center py-16">
         <div className="max-w-md mx-auto space-y-6">
-          <div className="w-24 h-24 mx-auto bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
+          <div className="w-24 h-24 mx-auto bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-900/40 dark:to-teal-900/40 rounded-full flex items-center justify-center">
             <div className="text-4xl">🎬</div>
           </div>
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold text-slate-700">No movies found</h3>
-            <p className="text-slate-500">Try adjusting your filters or explore different genres and languages to discover amazing movies</p>
+          <div className="space-y-2">            <h3 className="text-2xl font-bold text-slate-700 dark:text-slate-100">No movies found</h3>
+            <p className="text-slate-500 dark:text-slate-400">Try adjusting your filters or explore different genres and languages to discover amazing movies</p>
           </div>
-          <div className="flex justify-center gap-2">
-            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">Try: Action</span>
-            <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">Try: Korean</span>
-            <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">Try: Animation</span>
+          <div className="flex justify-center gap-2">            <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">Try: Action</span>
+            <span className="px-3 py-1 bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300 rounded-full text-sm">Try: Korean</span>
+            <span className="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300 rounded-full text-sm">Try: Animation</span>
           </div>
         </div>
       </div>
     );
   }
-
-  return (    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 bg-white/50 backdrop-blur-sm rounded-xl border border-white/60">        <div>
+  return (
+    <div className="space-y-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 bg-slate-50/50 dark:bg-slate-800/60 backdrop-blur-sm rounded-xl border border-slate-200/60 dark:border-slate-600/60">
+        <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-2xl font-bold text-slate-800">
+            <h2 className="text-2xl font-bold text-slate-800 dark:text-white">
               Movie Recommendations
             </h2>
             {isAIGenerated && (
@@ -43,7 +42,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = fa
               </span>
             )}
           </div>
-          <p className="text-slate-600 mt-1">
+          <p className="text-slate-600 dark:text-gray-300 mt-1">
             {isAIGenerated 
               ? `AI-generated ${movies.length} personalized recommendations`
               : `Found ${movies.length} movies matching your preferences`
@@ -51,17 +50,16 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = fa
           </p>
         </div>
         
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-slate-600 mr-2">Sort by:</span>
-          <Button variant="outline" size="sm" className="text-slate-600">
+        <div className="flex items-center gap-2">          <span className="text-sm text-slate-600 dark:text-gray-400 mr-2">Sort by:</span>
+          <Button variant="outline" size="sm" className="text-slate-600 dark:text-gray-300 border-slate-300 dark:border-gray-600">
             <Star className="w-4 h-4 mr-1" />
             Rating
           </Button>
-          <Button variant="outline" size="sm" className="text-slate-600">
+          <Button variant="outline" size="sm" className="text-slate-600 dark:text-gray-300 border-slate-300 dark:border-gray-600">
             <Calendar className="w-4 h-4 mr-1" />
             Year
           </Button>
-          <Button variant="outline" size="sm" className="text-slate-600">
+          <Button variant="outline" size="sm" className="text-slate-600 dark:text-gray-300 border-slate-300 dark:border-gray-600">
             <SlidersHorizontal className="w-4 h-4 mr-1" />
             Relevance
           </Button>

@@ -40,28 +40,26 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
       setSelectedLanguages([...selectedLanguages, language]);
     }
   };
-
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-xl bg-white/90 backdrop-blur-sm">
-      <CardHeader>        <CardTitle className="text-center text-2xl font-bold text-slate-800">
+    <Card className="w-full max-w-4xl mx-auto shadow-xl bg-slate-50/90 dark:bg-slate-800/95 backdrop-blur-sm border-slate-200/60 dark:border-slate-600/60">
+      <CardHeader>        <CardTitle className="text-center text-2xl font-bold text-slate-800 dark:text-slate-100">
           Discover Your Perfect Movie
         </CardTitle>
-        <p className="text-center text-slate-600 mt-2">
+        <p className="text-center text-slate-600 dark:text-slate-300 mt-2">
           Select your preferences and we'll find movies from our curated collection that match your taste
         </p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-3">
-          <h3 className="font-semibold text-slate-700">Genres</h3>
+          <h3 className="font-semibold text-slate-700 dark:text-slate-300">Genres</h3>
           <div className="flex flex-wrap gap-2">
             {genres.map((genre) => (
               <Badge
                 key={genre}
-                variant={selectedGenres.includes(genre) ? "default" : "outline"}
-                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
+                variant={selectedGenres.includes(genre) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
                   selectedGenres.includes(genre)
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
-                    : 'hover:bg-slate-100'
+                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white'
+                    : 'hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-300 dark:border-slate-500'
                 }`}
                 onClick={() => toggleGenre(genre)}
               >
@@ -72,16 +70,15 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
         </div>
 
         <div className="space-y-3">
-          <h3 className="font-semibold text-slate-700">Languages</h3>
+          <h3 className="font-semibold text-slate-700 dark:text-slate-300">Languages</h3>
           <div className="flex flex-wrap gap-2">
             {languages.map((language) => (
               <Badge
                 key={language}
-                variant={selectedLanguages.includes(language) ? "default" : "outline"}
-                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
+                variant={selectedLanguages.includes(language) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
                   selectedLanguages.includes(language)
-                    ? 'bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700'
-                    : 'hover:bg-slate-100'
+                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white'
+                    : 'hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-300 dark:border-slate-500'
                 }`}
                 onClick={() => toggleLanguage(language)}
               >
@@ -94,7 +91,7 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
         <div className="flex justify-center pt-4">
           <Button
             onClick={onFilter}
-            disabled={isLoading}            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            disabled={isLoading}            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >            {isLoading ? (
               <>                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                 Searching...

@@ -49,19 +49,17 @@ const Auth = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <Card className="w-full max-w-md shadow-xl bg-white/90 backdrop-blur-sm">
+  };  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <Card className="w-full max-w-md shadow-xl bg-slate-50/90 dark:bg-slate-800/95 backdrop-blur-sm border-slate-200/60 dark:border-slate-600/60">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg flex items-center justify-center">
               <Film className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-slate-800">CineFindr</span>
+            <span className="text-2xl font-bold text-slate-800 dark:text-slate-100">CineFindr</span>
           </div>
-          <CardTitle className="text-xl">
+          <CardTitle className="text-xl text-slate-700 dark:text-slate-200">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
           </CardTitle>
         </CardHeader>
@@ -69,7 +67,7 @@ const Auth = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             {isSignUp && (
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="fullName" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Full Name
                 </label>
                 <Input
@@ -83,7 +81,7 @@ const Auth = () => {
               </div>
             )}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Email
               </label>
               <Input
@@ -96,7 +94,7 @@ const Auth = () => {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
                 Password
               </label>
               <Input
@@ -108,10 +106,9 @@ const Auth = () => {
                 placeholder="Enter your password"
                 minLength={6}
               />
-            </div>
-            <Button
+            </div>            <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
               disabled={loading}
             >
               {loading ? 'Loading...' : (isSignUp ? 'Sign Up' : 'Sign In')}
@@ -121,7 +118,7 @@ const Auth = () => {
             <button
               type="button"
               onClick={() => setIsSignUp(!isSignUp)}
-              className="text-blue-600 hover:text-blue-700 text-sm"
+              className="text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300 text-sm"
             >
               {isSignUp ? 'Already have an account? Sign in' : "Don't have an account? Sign up"}
             </button>

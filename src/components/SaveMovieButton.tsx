@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Heart } from 'lucide-react';
@@ -26,15 +25,13 @@ export const SaveMovieButton: React.FC<SaveMovieButtonProps> = ({ movie }) => {
   };
 
   if (!user) return null;
-
   return (
     <Button
       onClick={handleClick}
       variant={isSaved ? "default" : "outline"}
-      size="sm"
-      className={`${isSaved 
-        ? 'bg-red-500 hover:bg-red-600 text-white' 
-        : 'hover:bg-red-50 hover:text-red-600 hover:border-red-300'
+      size="sm"      className={`${isSaved 
+        ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white' 
+        : 'hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-300 dark:hover:border-emerald-500'
       } transition-all duration-200`}
     >
       <Heart className={`w-4 h-4 mr-1 ${isSaved ? 'fill-current' : ''}`} />
