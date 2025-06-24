@@ -47,6 +47,8 @@ serve(async (req) => {
     
     Return only the JSON array, no additional text.`;
 
+    console.log('Making request to Gemini API...');
+
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${geminiApiKey}`, {
       method: 'POST',
       headers: {
@@ -76,6 +78,8 @@ serve(async (req) => {
     }
 
     const data = await response.json();
+    console.log('Gemini API response received');
+    
     const generatedText = data.candidates[0].content.parts[0].text;
     
     // Clean up the response to extract JSON
@@ -90,6 +94,7 @@ serve(async (req) => {
     let movies;
     try {
       movies = JSON.parse(cleanedText);
+      console.log(`Successfully parsed ${movies.length} movies`);
     } catch (parseError) {
       console.error('Failed to parse Gemini response:', cleanedText);
       throw new Error('Invalid response format from Gemini API');
