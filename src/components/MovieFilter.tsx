@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface MovieFilterProps {
   selectedGenres: string[];
@@ -92,7 +91,7 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
             onClick={onFilter}
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
           >
-            <search className="w-5 h-5 mr-2" />
+            <Search className="w-5 h-5 mr-2" />
             Find Movies
           </Button>
         </div>

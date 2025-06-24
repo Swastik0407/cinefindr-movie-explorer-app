@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { film } from 'lucide-react';
+import { Film } from 'lucide-react';
 
 export const Header = () => {
   return (
@@ -10,7 +10,7 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <film className="w-5 h-5 text-white" />
+              <Film className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-bold text-slate-800">CineFindr</span>
           </div>
