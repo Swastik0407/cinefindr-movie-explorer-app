@@ -1,16 +1,46 @@
-
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MovieCard } from './MovieCard';
 import { Movie } from '../types/movie';
 import { Button } from '@/components/ui/button';
 import { SlidersHorizontal, Star, Calendar } from 'lucide-react';
+import { gsap } from 'gsap';
 
 interface MovieGridProps {
   movies: Movie[];
   isAIGenerated?: boolean;
 }
 
-export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = false }) => {  if (movies.length === 0) {
+export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = false }) => {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  // Animate movie cards when they load
+  useEffect(() => {
+    if (movies.length > 0 && cardsRef.current) {
+      const cards = cardsRef.current.children;
+      
+      gsap.fromTo(cards, 
+        { 
+          opacity: 0, 
+          y: 60,
+          scale: 0.8,
+          rotationX: 15
+        },
+        { 
+          opacity: 1, 
+          y: 0,
+          scale: 1,
+          rotationX: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "back.out(1.7)",
+          delay: 0.2
+        }
+      );
+    }
+  }, [movies]);
+
+  if (movies.length === 0) {
     return (
       <div className="text-center py-16">
         <div className="max-w-md mx-auto space-y-6">
@@ -66,7 +96,7 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ movies, isAIGenerated = fa
         </div>
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" ref={cardsRef}>
         {movies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}

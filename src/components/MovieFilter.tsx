@@ -1,9 +1,9 @@
-
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Search, Loader2 } from 'lucide-react';
+import { gsap } from 'gsap';
 
 interface MovieFilterProps {
   selectedGenres: string[];
@@ -25,6 +25,39 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
   onFilter,
   isLoading = false
 }) => {
+  const filterButtonRef = useRef<HTMLButtonElement>(null);
+  const badgesRef = useRef<HTMLDivElement>(null);
+
+  // Animate filter button when loading
+  useEffect(() => {
+    if (isLoading && filterButtonRef.current) {
+      gsap.to(filterButtonRef.current, {
+        scale: 0.95,
+        duration: 0.1,
+        ease: "power2.out",
+        yoyo: true,
+        repeat: 1
+      });
+    }
+  }, [isLoading]);
+
+  // Animate badges when they change
+  useEffect(() => {
+    if (badgesRef.current) {
+      const badges = badgesRef.current.querySelectorAll('.badge-item');
+      gsap.fromTo(badges, 
+        { scale: 0.8, opacity: 0 },
+        { 
+          scale: 1, 
+          opacity: 1, 
+          duration: 0.3,
+          stagger: 0.05,
+          ease: "back.out(1.7)"
+        }
+      );
+    }
+  }, [selectedGenres, selectedLanguages]);
+
   const toggleGenre = (genre: string) => {
     if (selectedGenres.includes(genre)) {
       setSelectedGenres(selectedGenres.filter(g => g !== genre));
@@ -52,11 +85,11 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
       <CardContent className="space-y-6">
         <div className="space-y-3">
           <h3 className="font-semibold text-slate-700 dark:text-slate-300">Genres</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" ref={badgesRef}>
             {genres.map((genre) => (
               <Badge
                 key={genre}
-                variant={selectedGenres.includes(genre) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
+                variant={selectedGenres.includes(genre) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 badge-item ${
                   selectedGenres.includes(genre)
                     ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white'
                     : 'hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-300 dark:border-slate-500'
@@ -71,11 +104,11 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
 
         <div className="space-y-3">
           <h3 className="font-semibold text-slate-700 dark:text-slate-300">Languages</h3>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2" ref={badgesRef}>
             {languages.map((language) => (
               <Badge
                 key={language}
-                variant={selectedLanguages.includes(language) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
+                variant={selectedLanguages.includes(language) ? "default" : "outline"}                className={`cursor-pointer transition-all duration-200 hover:scale-105 badge-item ${
                   selectedLanguages.includes(language)
                     ? 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white'
                     : 'hover:bg-slate-100 dark:hover:bg-slate-700 dark:text-slate-300 dark:border-slate-500'
@@ -92,6 +125,7 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
           <Button
             onClick={onFilter}
             disabled={isLoading}            className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            ref={filterButtonRef}
           >            {isLoading ? (
               <>                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                 Searching...
