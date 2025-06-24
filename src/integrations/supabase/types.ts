@@ -9,7 +9,77 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      saved_movies: {
+        Row: {
+          id: string
+          movie_genre: string | null
+          movie_language: string | null
+          movie_poster: string | null
+          movie_rating: number | null
+          movie_summary: string | null
+          movie_title: string
+          saved_at: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          movie_genre?: string | null
+          movie_language?: string | null
+          movie_poster?: string | null
+          movie_rating?: number | null
+          movie_summary?: string | null
+          movie_title: string
+          saved_at?: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          movie_genre?: string | null
+          movie_language?: string | null
+          movie_poster?: string | null
+          movie_rating?: number | null
+          movie_summary?: string | null
+          movie_title?: string
+          saved_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_movies_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
