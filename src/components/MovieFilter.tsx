@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Search } from 'lucide-react';
+import { Search, Loader2 } from 'lucide-react';
 
 interface MovieFilterProps {
   selectedGenres: string[];
@@ -10,6 +11,7 @@ interface MovieFilterProps {
   selectedLanguages: string[];
   setSelectedLanguages: (languages: string[]) => void;
   onFilter: () => void;
+  isLoading?: boolean;
 }
 
 const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance', 'Thriller', 'Animation'];
@@ -20,7 +22,8 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
   setSelectedGenres,
   selectedLanguages,
   setSelectedLanguages,
-  onFilter
+  onFilter,
+  isLoading = false
 }) => {
   const toggleGenre = (genre: string) => {
     if (selectedGenres.includes(genre)) {
@@ -42,7 +45,7 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
     <Card className="w-full max-w-4xl mx-auto shadow-xl bg-white/90 backdrop-blur-sm">
       <CardHeader>
         <CardTitle className="text-center text-2xl font-bold text-slate-800">
-          Find Your Perfect Movie
+          Find Your Perfect Movie with AI
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -89,10 +92,20 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
         <div className="flex justify-center pt-4">
           <Button
             onClick={onFilter}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+            disabled={isLoading}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
-            <Search className="w-5 h-5 mr-2" />
-            Find Movies
+            {isLoading ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Search className="w-5 h-5 mr-2" />
+                Find Movies with AI
+              </>
+            )}
           </Button>
         </div>
       </CardContent>

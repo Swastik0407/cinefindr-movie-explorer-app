@@ -1,9 +1,10 @@
-
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { MovieFilter } from '../components/MovieFilter';
 import { MovieGrid } from '../components/MovieGrid';
 import { Movie } from '../types/movie';
+import { useMovieGenerator } from '../hooks/useMovieGenerator';
+import { toast } from 'sonner';
 
 // Dummy movie data
 const sampleMovies: Movie[] = [
@@ -67,25 +68,50 @@ const Index = () => {
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>(sampleMovies);
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+  const { generateMovies, isGenerating, error } = useMovieGenerator();
 
-  const handleFilterMovies = () => {
-    console.log('Filtering movies with:', { selectedGenres, selectedLanguages });
+  const handleFilterMovies = async () => {
+    console.log('Generating AI movies with:', { selectedGenres, selectedLanguages });
     
-    let filtered = sampleMovies;
-    
-    if (selectedGenres.length > 0) {
-      filtered = filtered.filter(movie => 
-        selectedGenres.some(genre => movie.genre.toLowerCase().includes(genre.toLowerCase()))
-      );
+    toast.loading('Generating personalized movie recommendations...', {
+      id: 'generating-movies'
+    });
+
+    try {
+      const aiMovies = await generateMovies(selectedGenres, selectedLanguages);
+      
+      if (aiMovies.length > 0) {
+        setFilteredMovies(aiMovies);
+        toast.success(`Generated ${aiMovies.length} personalized recommendations!`, {
+          id: 'generating-movies'
+        });
+      } else {
+        // Fallback to original filtering logic if AI generation fails
+        let filtered = sampleMovies;
+        
+        if (selectedGenres.length > 0) {
+          filtered = filtered.filter(movie => 
+            selectedGenres.some(genre => movie.genre.toLowerCase().includes(genre.toLowerCase()))
+          );
+        }
+        
+        if (selectedLanguages.length > 0) {
+          filtered = filtered.filter(movie => 
+            selectedLanguages.includes(movie.language)
+          );
+        }
+        
+        setFilteredMovies(filtered);
+        toast.success('Showing filtered results from our collection', {
+          id: 'generating-movies'
+        });
+      }
+    } catch (err) {
+      console.error('Failed to generate movies:', err);
+      toast.error('Failed to generate recommendations. Please try again.', {
+        id: 'generating-movies'
+      });
     }
-    
-    if (selectedLanguages.length > 0) {
-      filtered = filtered.filter(movie => 
-        selectedLanguages.includes(movie.language)
-      );
-    }
-    
-    setFilteredMovies(filtered);
   };
 
   return (
@@ -98,7 +124,7 @@ const Index = () => {
             CineFindr
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            Discover your next favorite movie with personalized recommendations tailored to your taste
+            Discover your next favorite movie with AI-powered personalized recommendations tailored to your taste
           </p>
         </div>
 
@@ -108,6 +134,7 @@ const Index = () => {
           selectedLanguages={selectedLanguages}
           setSelectedLanguages={setSelectedLanguages}
           onFilter={handleFilterMovies}
+          isLoading={isGenerating}
         />
 
         <MovieGrid movies={filteredMovies} />
