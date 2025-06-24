@@ -20,6 +20,7 @@ const Index = () => {
     loadInitialMovies();
   }, []); // Empty dependency array - only run once on mount
   // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const handleFilterMovies = async () => {
     console.log('🎬 Filtering movies with preferences:', { selectedGenres, selectedLanguages });
     
@@ -47,7 +48,8 @@ const Index = () => {
         
         toast.success(message, {
           id: 'filtering-movies'
-        });      } else {
+        });
+      } else {
         toast.info('No movies found with those filters. Try different combinations!', {
           id: 'filtering-movies'
         });

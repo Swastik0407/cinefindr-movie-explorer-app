@@ -15,7 +15,7 @@ interface MovieFilterProps {
 }
 
 const genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance', 'Thriller', 'Animation'];
-const languages = ['English', 'Hindi', 'Korean', 'Japanese', 'French', 'Spanish', 'German'];
+const languages = ['English', 'Hindi', 'Korean', 'Japanese', 'French', 'Spanish', 'German', 'Italian'];
 
 export const MovieFilter: React.FC<MovieFilterProps> = ({
   selectedGenres,
@@ -43,10 +43,12 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
 
   return (
     <Card className="w-full max-w-4xl mx-auto shadow-xl bg-white/90 backdrop-blur-sm">
-      <CardHeader>
-        <CardTitle className="text-center text-2xl font-bold text-slate-800">
-          Find Your Perfect Movie with AI
+      <CardHeader>        <CardTitle className="text-center text-2xl font-bold text-slate-800">
+          Discover Your Perfect Movie
         </CardTitle>
+        <p className="text-center text-slate-600 mt-2">
+          Select your preferences and we'll find movies from our curated collection that match your taste
+        </p>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-3">
@@ -92,18 +94,15 @@ export const MovieFilter: React.FC<MovieFilterProps> = ({
         <div className="flex justify-center pt-4">
           <Button
             onClick={onFilter}
-            disabled={isLoading}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                Generating...
+            disabled={isLoading}            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-3 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          >            {isLoading ? (
+              <>                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Searching...
               </>
             ) : (
               <>
                 <Search className="w-5 h-5 mr-2" />
-                Find Movies with AI
+                Find Movies
               </>
             )}
           </Button>
